@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>산리오 캐릭터 도감</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jua&family=Quicksand:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="bg-blob blob-a" aria-hidden="true"></div>
+    <div class="bg-blob blob-b" aria-hidden="true"></div>
+    <div class="bg-blob blob-c" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="brand">
+          <span class="brand-bow" aria-hidden="true">🎀</span>
+          <div>
+            <h1 id="site-title">산리오 캐릭터 도감</h1>
+            <p id="site-subtitle" class="subtitle">90명의 친구들을 한눈에</p>
+          </div>
+        </div>
+        <button type="button" class="lang-toggle" id="lang-toggle" aria-label="언어 전환">
+          <span class="lang-option is-active" data-lang-label="ko">🇰🇷 KO</span>
+          <span class="lang-option" data-lang-label="en">🇺🇸 EN</span>
+        </button>
+      </div>
+
+      <div class="search-wrap">
+        <span class="search-icon" aria-hidden="true">🔍</span>
+        <input
+          type="search"
+          id="search-input"
+          autocomplete="off"
+          placeholder="캐릭터 이름이나 특징을 검색해보세요 (예: 헬로키티, 1974)"
+        />
+      </div>
+
+      <div class="toolbar">
+        <label class="sort-label">
+          <span id="sort-label-text">정렬</span>
+          <select id="sort-select">
+            <option value="name">이름순</option>
+            <option value="year-asc">데뷔 연도 · 오래된 순</option>
+            <option value="year-desc">데뷔 연도 · 최신 순</option>
+          </select>
+        </label>
+        <div class="view-tabs" role="tablist">
+          <button type="button" class="tab is-active" data-view="all" id="tab-all">전체</button>
+          <button type="button" class="tab" data-view="fav" id="tab-fav">즐겨찾기</button>
+        </div>
+        <button type="button" class="gacha-btn" id="gacha-btn">오늘의 산리오 친구는?</button>
+        <p class="result-count" id="result-count"></p>
+      </div>
+    </header>
+
+    <section class="favorites-strip hidden" id="favorites-strip" aria-label="즐겨찾기">
+      <h2 id="favorites-title">최애 캐릭터</h2>
+      <div class="favorites-row" id="favorites-row"></div>
+    </section>
+
+    <main>
+      <section class="gallery" id="gallery" aria-live="polite"></section>
+      <p class="empty-state hidden" id="empty-state">검색 결과가 없어요. 다른 키워드를 입력해 보세요.</p>
+      <nav class="pagination" id="pagination" aria-label="페이지"></nav>
+    </main>
+
+    <footer class="site-footer">
+      <p id="footer-text">Sanrio Character Encyclopedia · 팬메이드 도감 · 이미지는 캐릭터 모티프 일러스트입니다.</p>
+    </footer>
+
+    <div class="modal-overlay hidden" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-name">
+      <div class="modal">
+        <button type="button" class="modal-close" id="modal-close" aria-label="닫기">×</button>
+        <div class="modal-hero">
+          <div class="modal-avatar" id="modal-avatar"></div>
+          <div>
+            <p class="modal-year" id="modal-year"></p>
+            <h2 id="modal-name"></h2>
+            <p class="modal-subname" id="modal-subname"></p>
+            <button type="button" class="fav-btn modal-fav" id="modal-fav">♡</button>
+          </div>
+        </div>
+        <dl class="modal-meta">
+          <div>
+            <dt id="label-species">종족 / 모티브</dt>
+            <dd id="modal-species"></dd>
+          </div>
+          <div>
+            <dt id="label-gender">성별</dt>
+            <dd id="modal-gender"></dd>
+          </div>
+          <div>
+            <dt id="label-debut">탄생 연도</dt>
+            <dd id="modal-debut"></dd>
+          </div>
+        </dl>
+        <h3 id="label-traits">성격 및 특징</h3>
+        <ul class="trait-list" id="modal-traits"></ul>
+        <h3 id="label-bio">상세 설명</h3>
+        <p class="modal-bio" id="modal-bio"></p>
+      </div>
+    </div>
+
+    <div class="gacha-overlay hidden" id="gacha-overlay">
+      <div class="gacha-card" id="gacha-card">
+        <p class="gacha-kicker" id="gacha-kicker">오늘의 산리오 친구는?</p>
+        <div class="gacha-avatar" id="gacha-avatar"></div>
+        <h2 id="gacha-name"></h2>
+        <p id="gacha-year"></p>
+        <button type="button" class="gacha-open" id="gacha-open">자세히 보기</button>
+        <button type="button" class="gacha-close" id="gacha-close">닫기</button>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
